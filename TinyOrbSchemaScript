@@ -1,0 +1,289 @@
+CREATE DATABASE  IF NOT EXISTS `tinyorb` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `tinyorb`;
+-- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)
+--
+-- Host: localhost    Database: tinyorb
+-- ------------------------------------------------------
+-- Server version	5.5.21
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `public_comment`
+--
+
+DROP TABLE IF EXISTS `public_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `public_comment` (
+  `idPublic_Comment` int(11) NOT NULL,
+  `Comment user` varchar(45) DEFAULT NULL,
+  `PID` int(11) NOT NULL,
+  PRIMARY KEY (`idPublic_Comment`),
+  KEY `PID` (`PID`),
+  CONSTRAINT `PID` FOREIGN KEY (`PID`) REFERENCES `publish_post` (`idPublish_Post`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `public_comment`
+--
+
+LOCK TABLES `public_comment` WRITE;
+/*!40000 ALTER TABLE `public_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `public_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passwordchangerequest`
+--
+
+DROP TABLE IF EXISTS `passwordchangerequest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `passwordchangerequest` (
+  `idChangeRequest` int(11) NOT NULL AUTO_INCREMENT,
+  `RequestCode` varchar(45) NOT NULL,
+  `RequestedDate` datetime NOT NULL,
+  `RequestedUser` varchar(45) NOT NULL,
+  `Requested` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idChangeRequest`),
+  KEY `RequestedUser` (`RequestedUser`),
+  CONSTRAINT `RequestedUser` FOREIGN KEY (`RequestedUser`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passwordchangerequest`
+--
+
+LOCK TABLES `passwordchangerequest` WRITE;
+/*!40000 ALTER TABLE `passwordchangerequest` DISABLE KEYS */;
+INSERT INTO `passwordchangerequest` VALUES (1,'397526c7dbb','2017-12-24 00:58:11','baksh1',0),(3,'8aefc3c505c','2017-12-24 00:58:48','baksh12',0),(4,'c6cc117777177b','2017-12-24 00:59:06','baksh12',0),(6,'f726672a18380','2017-12-24 00:59:41','baksh1',0),(7,'07a4815ddf','2017-12-24 01:30:17','baksh1',0),(8,'10c9c283325','2017-12-25 07:18:15','baksh1',0),(9,'38af2ff2149a87','2017-12-25 07:19:09','baksh1',0),(10,'338d9b4bb7','2017-12-25 07:21:28','baksh1',0),(11,'aa14ff241c583','2017-12-28 08:56:23','baksh1',0),(12,'b90ccaf4be67','2017-12-28 08:59:20','baksh1',0),(13,'abf9b07998b92','2017-12-28 09:38:06','baksh1',0),(14,'d5912c4c764252','2017-12-28 09:45:32','baksh1',0),(15,'0182a5e850729','2017-12-28 09:53:18','baksh1',0),(17,'f96734c395b21b','2017-12-28 10:01:18','baksh12',0),(18,'6d52c5f1cc47','2017-12-28 10:02:10','baksh12',0),(19,'9e7306b990a99b1','2017-12-28 10:23:40','baksh12',0),(20,'5cc6d72f8c','2017-12-28 10:38:57','baksh12',0),(21,'4684cd7d38231','2017-12-29 06:09:58','baksh12',0),(22,'aeb581bd257d','2017-12-29 08:52:04','baksh12',0);
+/*!40000 ALTER TABLE `passwordchangerequest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `codetable`
+--
+
+DROP TABLE IF EXISTS `codetable`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `codetable` (
+  `idCodeTable` varchar(10) NOT NULL,
+  `Code` varchar(45) NOT NULL,
+  `GenerateTime` datetime NOT NULL,
+  `ExpireTime` datetime NOT NULL,
+  PRIMARY KEY (`idCodeTable`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `codetable`
+--
+
+LOCK TABLES `codetable` WRITE;
+/*!40000 ALTER TABLE `codetable` DISABLE KEYS */;
+INSERT INTO `codetable` VALUES ('Buffer','77adaacaafbc969','2017-12-30 05:30:35','2017-12-30 06:00:35'),('Current','e2ee5ce537e6cc','2017-12-30 05:30:36','2017-12-30 06:00:36');
+/*!40000 ALTER TABLE `codetable` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inquiry`
+--
+
+DROP TABLE IF EXISTS `inquiry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `inquiry` (
+  `idInquiry` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `description` longtext NOT NULL,
+  `opendate` date NOT NULL,
+  `closedate` date DEFAULT NULL,
+  `openstatus` tinyint(1) NOT NULL,
+  `reopendate` date DEFAULT NULL,
+  PRIMARY KEY (`idInquiry`),
+  KEY `user` (`user`),
+  CONSTRAINT `user` FOREIGN KEY (`user`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inquiry`
+--
+
+LOCK TABLES `inquiry` WRITE;
+/*!40000 ALTER TABLE `inquiry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inquiry` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `iduser` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `verification` varchar(20) DEFAULT 'not verified',
+  PRIMARY KEY (`iduser`,`Email`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'baksh1','fhgfdfdg@gdfh.chj','pajisingh','not verified'),(2,'baksh12','baksh12@gmail.com','pajisingh','not verified');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `article` (
+  `idArticle` int(11) NOT NULL AUTO_INCREMENT,
+  `Category` varchar(45) DEFAULT NULL,
+  `Author` varchar(45) NOT NULL,
+  `LastModified` varchar(45) NOT NULL,
+  `saveData` longtext,
+  `Heading` varchar(255) DEFAULT NULL,
+  `PubId` int(11) DEFAULT '-1',
+  PRIMARY KEY (`idArticle`),
+  KEY `Author` (`Author`),
+  CONSTRAINT `Author` FOREIGN KEY (`Author`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `article`
+--
+
+LOCK TABLES `article` WRITE;
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+INSERT INTO `article` VALUES (1,NULL,'baksh1','2017-03-05',NULL,NULL,-1),(2,'general','baksh12','2017-04-09','<p>Hello world, This is first test.hjghjghjghj</p>','This is test',1),(3,'general','baksh12','2017-04-09','<p>sdfsdfs</p>','dfhj',2),(7,NULL,'baksh12','2017-12-23',NULL,NULL,6),(8,NULL,'baksh12','2017-12-23',NULL,NULL,7),(9,'general','baksh12','2017-12-23','<p>We don\'t know what happened. Kai shima kaiju koi chi jamu asi</p>','Chapter 2',8),(10,NULL,'baksh12','2017-12-23',NULL,NULL,9),(11,NULL,'baksh12','2017-12-23',NULL,NULL,10),(12,NULL,'baksh12','2017-12-23',NULL,NULL,-1),(13,'general','baksh12','2017-12-23','<p>This Chapter fixed a bug long time persistance. On publish latest data on article also saved Which was failing.</p>\n<p>&nbsp;</p>\n<p>Looking sky for the solution. Hope</p>','Chapter 5',11);
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `search_tag`
+--
+
+DROP TABLE IF EXISTS `search_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `search_tag` (
+  `tag` varchar(100) NOT NULL,
+  `ArticleID` int(11) NOT NULL,
+  KEY `ArticleID` (`ArticleID`),
+  CONSTRAINT `ArticleID` FOREIGN KEY (`ArticleID`) REFERENCES `article` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `search_tag`
+--
+
+LOCK TABLES `search_tag` WRITE;
+/*!40000 ALTER TABLE `search_tag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `search_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `publish_post`
+--
+
+DROP TABLE IF EXISTS `publish_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `publish_post` (
+  `idPublish_Post` int(11) NOT NULL AUTO_INCREMENT,
+  `Rating` float DEFAULT NULL,
+  `Tags` varchar(200) DEFAULT NULL,
+  `ViewCount` int(11) DEFAULT NULL,
+  `RateCount` int(11) DEFAULT NULL,
+  `PAuthor` varchar(45) NOT NULL,
+  `Date` date NOT NULL,
+  `Heading` varchar(200) NOT NULL,
+  `Category` varchar(50) NOT NULL,
+  PRIMARY KEY (`idPublish_Post`),
+  KEY `PAuthor` (`PAuthor`),
+  CONSTRAINT `PAuthor` FOREIGN KEY (`PAuthor`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `publish_post`
+--
+
+LOCK TABLES `publish_post` WRITE;
+/*!40000 ALTER TABLE `publish_post` DISABLE KEYS */;
+INSERT INTO `publish_post` VALUES (1,0,NULL,0,0,'baksh12','2017-04-09','This is test','general'),(2,0,NULL,0,0,'baksh12','2017-04-09','dfhj','general'),(3,0,NULL,0,0,'baksh12','2017-04-09','sdfsdf','general'),(4,0,NULL,0,0,'baksh12','2017-04-09','sdfsd','general'),(5,0,NULL,0,0,'baksh12','2017-04-09','sfdf','general'),(6,0,NULL,0,0,'baksh12','2017-12-23','New Chapter 1','general'),(7,0,NULL,0,0,'baksh12','2017-12-23','chapter 1','general'),(8,0,NULL,0,0,'baksh12','2017-12-23','Chapter 2','general'),(9,0,NULL,0,0,'baksh12','2017-12-23','Chapter 3','general'),(10,0,NULL,0,0,'baksh12','2017-12-23','Chapter 4','general'),(11,0,NULL,0,0,'baksh12','2017-12-23','Chapter 5','general');
+/*!40000 ALTER TABLE `publish_post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userprofile`
+--
+
+DROP TABLE IF EXISTS `userprofile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userprofile` (
+  `username` varchar(45) NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `Country` varchar(45) DEFAULT NULL,
+  `State` varchar(45) DEFAULT NULL,
+  `Gender` varchar(15) DEFAULT NULL,
+  `AEmail` varchar(45) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  PRIMARY KEY (`username`),
+  KEY `username` (`username`),
+  CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userprofile`
+--
+
+LOCK TABLES `userprofile` WRITE;
+/*!40000 ALTER TABLE `userprofile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `userprofile` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-01-06  1:02:38
